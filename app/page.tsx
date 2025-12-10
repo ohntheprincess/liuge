@@ -1,65 +1,72 @@
-import Image from "next/image";
+"use client";
+import './globals.css';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Home() {
+const Home: React.FC = () => {
+  const [step, setStep] = useState(1);
+
+  const nextStep = () => setStep(step + 1);
+
+  const messages = [
+    "山东小哥哥，\n 刘哥你好呀！",
+    "下一个问题：今天你开心吗？",
+    "当然你一定会开心，因为你已经在和我聊天啦！明天你也会一样开心哦，祝你明天不要累。"
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-cyan-100 to-teal-100 p-4 font-sans">
+      
+      <AnimatePresence mode="wait">
+        {step <= 3 && (
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -50, scale: 0.9 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="w-full max-w-md p-6 bg-white rounded-3xl shadow-2xl text-center"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <h1 className="text-2xl md:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">
+              {messages[step - 1]}
+            </h1>
+
+            {step === 1 && (
+              <button
+                onClick={nextStep}
+                className="px-8 py-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:scale-110 transition-transform duration-300"
+              >
+                下一步
+              </button>
+            )}
+
+            {step === 2 && (
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={nextStep}
+                  className="px-8 py-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:scale-110 transition-transform duration-300"
+                >
+                  开心
+                </button>
+                <button
+                  onClick={nextStep}
+                  className="px-8 py-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:scale-110 transition-transform duration-300"
+                >
+                  开心
+                </button>
+              </div>
+            )}
+
+            {step === 3 && (
+              <p className="mt-4 text-lg md:text-xl text-teal-700">
+                🎉 祝你开心每一天！🎉
+              </p>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
-}
+};
+
+export default Home;
