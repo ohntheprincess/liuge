@@ -9,9 +9,9 @@ const Home: React.FC = () => {
   const nextStep = () => setStep(step + 1);
 
   const messages = [
-    "山东小哥哥，\n 刘哥你好呀！",
-    "下一个问题：今天你开心吗？",
-    "当然你一定会开心，因为你已经在和我聊天啦！明天你也会一样开心哦，祝你明天不要累。"
+    <>🌟 山东小哥哥，<br />👋 刘哥你好呀！</>,
+    "❓ 下一个问题：今天你开心吗？ 😄",
+    "🎉 当然你一定会开心，因为你已经在和我聊天啦！😎\n明天你也会一样开心哦 🌈✨ 祝你明天不要累 😴💤"
   ];
 
   return (
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="w-full max-w-md p-6 bg-white rounded-3xl shadow-2xl text-center"
           >
-            <h1 className="text-2xl md:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">
+            <h1 className="text-2xl md:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500 whitespace-pre-line">
               {messages[step - 1]}
             </h1>
 
@@ -46,20 +46,20 @@ const Home: React.FC = () => {
                   onClick={nextStep}
                   className="px-8 py-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:scale-110 transition-transform duration-300"
                 >
-                  开心
+                  开心 😄
                 </button>
                 <button
                   onClick={nextStep}
                   className="px-8 py-3 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:scale-110 transition-transform duration-300"
                 >
-                  开心
+                  开心 😎
                 </button>
               </div>
             )}
 
             {step === 3 && (
               <p className="mt-4 text-lg md:text-xl text-teal-700">
-                🎉 祝你开心每一天！🎉
+                🎉 祝你开心每一天！✨🌈
               </p>
             )}
           </motion.div>
